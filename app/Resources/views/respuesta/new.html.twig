@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block extra_js %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="text-right"><img src="{{ asset('img/ccmlogo200x100.png') }}"> </div>
+    <br>
+    <h2 class="text-secondary mb-4">Proceso de auscultación interno para la designación de la dirección del CCM. Período  2019-2023</h2>
+    <h4 class="mb-4">{{ academico.titulo }} {{ academico.nombre }} {{ academico.apellido }}</h4>
+
+    {{ form_start(form, {'action': path('respuesta_new',{'slug':slug,'token':token} )}) }}
+    <hr/>
+    <p>Puede ordenar los proyectos de los candidatos según sus preferencia.<br> La posición de los nombres de los candidatos en la lista está en orden
+        alfabético de acuerdo al primer apellido.</p>
+    <p><strong>Instrucciones:</strong></p>
+    <p>
+        -Seleccionar con el mouse y mover el nombre del candidato para ordenarlo dentro de la lista.<br>
+        -Al momento de enviar el formulario, el orden actual de los candidatos dentro de la lista será el que se reciba.<br>
+        -Ninguno de los campos del formulario es obligatorio.<br>
+        -Al enviar el formulario ya no será posible realizar modificaciones.
+    </p>
+
+    <div class="row d-flex">
+
+        <div class="col-1" style="padding-top: 35px">
+            <div><h2>1</h2></div>
+            <div><h2>2</h2></div>
+            <div><h2>3</h2></div>
+            <div><h2>4</h2></div>
+        </div>
+        <div class="col col-lg-6">
+            <ul class="list-group mt-4" id="demo2">
+                <li class="list-group-item"> Dr. Abel Castorena Martínez</li>
+                <li class="list-group-item"> Dr. Alejandro Corichi Rodríguez Gil</li>
+                <li class="list-group-item"> Dr. Michael Hrusak</li>
+                <li class="list-group-item"> Dr. Daniel Pellicer Covarrubias</li>
+            </ul>
+        </div>
+        <div class="col-1" style="padding-top: 80px">
+            <h1><i class="fa fa-arrows-v" aria-hidden="true"></i></h1>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <p class="lead">Comentarios</p>
+                <p>(Los comentarios son anónimos, pero visibles para todos los académicos que hayan contestado esta consulta.)</p>
+                {{ form_widget(form.comentarios, {'attr': {'class': 'form-control' ,'placeholder':'Comentarios','rows':'6'} } ) }}
+                <div class="text-danger">{{ form_errors(form.comentarios) }}</div>
+            </div>
+        </div>
+    </div>
+    <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Enviar" onclick="myFunction();" />
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+
+    <script type="text/javascript">
+        // $('.my-selector').collection();
+
+        $('.my-selector').collection({
+            init_with_n_elements: 4,
+        });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js"></script>
+    <script>
+        Sortable.create(demo2, {
+            animation: 100,
+            group: 'list-1',
+            draggable: '.list-group-item',
+            handle: '.list-group-item',
+            sort: true,
+            filter: '.sortable-disabled',
+            chosenClass: 'active'
+        });
+
+        Sortable.create(demo2, {
+            group: 'list-1',
+            handle: '.list-group-item'
+        });
+
+    </script>
+
+    <script>
+        function myFunction() {
+            var list = document.getElementsByTagName("UL")[0];
+            document.getElementById("form_respuesta_0").value = list.getElementsByTagName("LI")[0].innerHTML;
+            document.getElementById("form_respuesta_1").value = list.getElementsByTagName("LI")[1].innerHTML;
+            document.getElementById("form_respuesta_2").value = list.getElementsByTagName("LI")[2].innerHTML;
+            document.getElementById("form_respuesta_3").value = list.getElementsByTagName("LI")[3].innerHTML;
+            document.getElementById('form').submit();
+        }
+    </script>
+{% endblock %}
