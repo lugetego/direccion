@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'jquery.collection.html.twig' %}
+
+
+{% block body %}
+
+    <div class="text-center"><img src="{{ asset('img/ccmlogo200x100.png') }}"> </div>
+    <h2 class="text-secondary mb-4">Consulta</h2>
+    <h4 class="mb-4">{{ academico.titulo }} {{ academico.nombre }} {{ academico.apellido }}</h4>
+
+    <p><a href="{{ path('respuesta_index') }}">Ver los resultados de la encuesta.</a></p>
+
+    {{ academico.respuesta }}
+
+    {{ form_start(form) }}
+
+
+    <div class="form-group mb-5">
+        <p class="lead">¿Ordenar a los candidatos de acuerdo a su preferencia?</p>
+        <div class="col-md-3">
+            {{ form_label(form.respuesta) }}
+            {{ form_errors(form.respuesta) }}
+            {{ form_widget(form.respuesta) }}
+        </div>
+        <p class="text-center">
+            <a href="#" class="collection-up btn btn-default">&lt;</a>
+            <a href="#" class="collection-remove btn btn-default">-</a>
+            <a href="#" class="collection-add btn btn-default">+</a>
+            <a href="#" class="collection-down btn btn-default">&gt;</a>
+        </p>
+
+    </div>
+    <div class="alert alert-info lead">
+        <ul>
+            <li>Además de votar puede escribir sus observaciones en el siguiente campo.</li>
+            <li>No es obligatorio escribir un comentario.</li>
+            <li>Los comentarios se mostrarán de forma anónima</li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <p class="lead">Comentarios</p>
+         {{ form_widget(form.comentarios, {'attr': {'class': 'form-control' ,'placeholder':'Comentarios','rows':'6'} } ) }}
+        <div class="text-danger">{{ form_errors(form.comentarios) }}</div>
+    </div>
+
+    <input type="submit" value="Enviar" class="btn btn-success btn-outline my-4"/>
+
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.my-selector').collection();
+    </script>
+
+{% endblock %}
