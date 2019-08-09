@@ -47,7 +47,7 @@ class AcademicoController extends Controller
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Consulta Dirección CCM')
                     ->setFrom('info@matmor.unam.mx')
-                                ->setTo('gerardo@matmor.unam.mx')
+                      ->setTo('gerardo@matmor.unam.mx')
 //                    ->setTo($academico->getEmail())
 //                    ->setBcc('rudos@matmor.unam.mx')
                     ->setBody($this->renderView(':respuesta:email.txt.twig', array('academico' => $academico)));
