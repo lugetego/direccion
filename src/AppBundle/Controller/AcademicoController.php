@@ -51,7 +51,7 @@ class AcademicoController extends Controller
 //                    ->setTo($academico->getEmail())
 //                    ->setBcc('rudos@matmor.unam.mx')
                     ->setBody($this->renderView(':respuesta:email.txt.twig', array('academico' => $academico)));
-                //$mailer->send($message);
+                $mailer->send($message);
             }
         }
 

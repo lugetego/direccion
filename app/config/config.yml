@@ -64,7 +64,10 @@ swiftmailer:
     password:  "%mailer_password%"
     encryption: "%mailer_encryption%"
     port: "%mailer_port%"
-    spool: { type: memory }
+    stream_options:
+        ssl:
+            verify_peer: false
+            verify_peer_name: false
 
 stof_doctrine_extensions:
     default_locale: es_MX

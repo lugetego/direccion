@@ -11,7 +11,7 @@
                 {{ academico.nombre }} {{ academico.apellido }}
             </td>
             <td>
-                <a href="{{ path('respuesta_new', {'slug': academico.slug, 'token': academico.token}) }}">respuesta/{{ academico.slug }}{{ academico.token }}/new</a>
+                <a href="{{ path('respuesta_new', {'slug': academico.slug, 'token': academico.token}) }}">respuesta/{{ academico.slug }}/{{ academico.token }}/new</a>
             </td></tr>
     {%  endfor %}
     </table>
