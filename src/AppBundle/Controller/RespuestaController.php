@@ -225,9 +225,20 @@ class RespuestaController extends Controller
         //   $data = array('respuesta' => array());
 
         $now = new \DateTime();
-        $deadline = new \DateTime('2019-12-07T18:41');
+        $deadline = new \DateTime('2019-08-16T11:41');
+        $em = $this->getDoctrine()->getManager();
+        $respuestas = $em->getRepository('AppBundle:Respuesta')->findAll();
+
+
         if($now >= $deadline)
-            return $this->render(':respuesta:closed.html.twig');
+
+            return $this->render('respuesta/closed.html.twig', array(
+                'respuestas' => $respuestas,
+
+
+            ));
+
+//            return $this->render(':respuesta:closed.html.twig');
 
         $em = $this->getDoctrine()->getManager();
         $academico = $em->getRepository('AppBundle:Academico')->findOneBySlug($slug);

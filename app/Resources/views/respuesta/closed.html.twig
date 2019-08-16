@@ -4,6 +4,99 @@
 
     <h2 class="my-5 text-danger"><i class="fa fa-ban"></i> La Consulta está cerrada.</h2>
 
-    <a href="{{ path('respuesta_index') }}">Resultados</a>
+{#    <a href="{{ path('respuesta_index') }}">Resultados</a>#}
+{##}
+
+    <h2 class="">Resultados</h2>
+    <p class="lead text-justify">En la tabla se muestran la cantidad de veces que un candidato ha sido seleccionado para
+        ocupar un lugar de acuerdo a la preferencia de cada académico que ha participado.</p>
+
+    {% set abel1, corichi1, michael1, pellicer1 = 0,0,0,0 %}
+    {% set abel2, corichi2, michael2, pellicer2 = 0,0,0,0 %}
+    {% set abel3, corichi3, michael3, pellicer3 = 0,0,0,0 %}
+    {% set abel4, corichi4, michael4, pellicer4 = 0,0,0,0 %}
+
+    {% for key, respuesta in respuestas %}
+        {% for key,value in respuesta.respuesta %}
+            {#            <p>{{ key }} : {{ value }}</p>#}
+            {%  if key == 0 and value == 'Dr. Abel Castorena Martínez' %} {% set  abel1 = abel1 + 1 %} {% else %} {% set abel1 = abel1 %}{% endif %}
+            {%  if key == 0 and value == 'Dr. Alejandro Corichi Rodríguez Gil' %} {% set corichi1 = corichi1 + 1 %} {% else %} {% set corichi1 = corichi1 %} {% endif %}
+            {%  if key == 0 and value == 'Dr. Michael Hrusak' %} {% set michael1 = michael1 + 1 %} {% else %} {% set michael1 = michael1 %} {% endif %}
+            {%  if key == 0 and value == 'Dr. Daniel Pellicer Covarrubias' %} {% set pellicer1 = pellicer1 + 1 %} {% else %} {% set pellicer1 = pellicer1 %} {% endif %}
+
+            {%  if key == 1 and value == 'Dr. Abel Castorena Martínez' %} {% set  abel2 = abel2 + 1 %} {% else %} {% set abel2 = abel2 %}{% endif %}
+            {%  if key == 1 and value == 'Dr. Alejandro Corichi Rodríguez Gil' %} {% set corichi2 = corichi2 + 1 %} {% else %} {% set corichi2 = corichi2 %} {% endif %}
+            {%  if key == 1 and value == 'Dr. Michael Hrusak' %} {% set michael2 = michael2 + 1 %} {% else %} {% set michael2 = michael2 %} {% endif %}
+            {%  if key == 1 and value == 'Dr. Daniel Pellicer Covarrubias' %} {% set pellicer2 = pellicer2 + 1 %} {% else %} {% set pellicer2 = pellicer2 %} {% endif %}
+
+            {%  if key == 2 and value == 'Dr. Abel Castorena Martínez' %} {% set  abel3 = abel3 + 1 %} {% else %} {% set abel3 = abel3 %}{% endif %}
+            {%  if key == 2 and value == 'Dr. Alejandro Corichi Rodríguez Gil' %} {% set corichi3 = corichi3 + 1 %} {% else %} {% set corichi3 = corichi3 %} {% endif %}
+            {%  if key == 2 and value == 'Dr. Michael Hrusak' %} {% set michael3 = michael3 + 1 %} {% else %} {% set michael3 = michael3 %} {% endif %}
+            {%  if key == 2 and value == 'Dr. Daniel Pellicer Covarrubias' %} {% set pellicer3 = pellicer3 + 1 %} {% else %} {% set pellicer3 = pellicer3 %} {% endif %}
+
+            {%  if key == 3 and value == 'Dr. Abel Castorena Martínez' %} {% set  abel4 = abel4 + 1 %} {% else %} {% set abel4 = abel4 %}{% endif %}
+            {%  if key == 3 and value == 'Dr. Alejandro Corichi Rodríguez Gil' %} {% set corichi4 = corichi4 + 1 %} {% else %} {% set corichi4 = corichi4 %} {% endif %}
+            {%  if key == 3 and value == 'Dr. Michael Hrusak' %} {% set michael4 = michael4 + 1 %} {% else %} {% set michael4 = michael4 %} {% endif %}
+            {%  if key == 3 and value == 'Dr. Daniel Pellicer Covarrubias' %} {% set pellicer4 = pellicer4 + 1 %} {% else %} {% set pellicer4 = pellicer4 %} {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" class="text-center">Nombre del candidato</th>
+                <th scope="col" class="text-center">Primero</th>
+                <th scope="col" class="text-center">Segundo</th>
+                <th scope="col" class="text-center">Tercero</th>
+                <th scope="col" class="text-center">Cuarto</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Dr. Abel Castorena Martínez</th>
+                <td class="text-center">{{ abel1 }}</td>
+                <td class="text-center">{{ abel2 }}</td>
+                <td class="text-center">{{ abel3 }}</td>
+                <td class="text-center">{{ abel4 }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dr. Alejandro Corichi Rodríguez Gil</th>
+                <td class="text-center">{{ corichi1 }}</td>
+                <td class="text-center">{{ corichi2 }}</td>
+                <td class="text-center">{{ corichi3 }}</td>
+                <td class="text-center">{{ corichi4 }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dr. Michael Hrusak</th>
+                <td class="text-center">{{ michael1 }}</td>
+                <td class="text-center">{{ michael2 }}</td>
+                <td class="text-center">{{ michael3 }}</td>
+                <td class="text-center">{{ michael4 }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dr. Daniel Pellicer Covarrubias</th>
+                <td class="text-center">{{ pellicer1 }}</td>
+                <td class="text-center">{{ pellicer2 }}</td>
+                <td class="text-center">{{ pellicer3 }}</td>
+                <td class="text-center">{{ pellicer4 }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <h2 class="mb-4">Participación: {{ respuestas|length }} de 29 académicos</h2>
+    <h2 class="text-secondary mb-4"><i class="fa fa-comment"></i> Comentarios</h2>
+
+    {% for respuesta in respuestas %}
+        {% if respuesta.comentarios %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="">{{ respuesta.comentarios|nl2br }}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
 
 {% endblock %}
